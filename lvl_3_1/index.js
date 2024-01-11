@@ -21,7 +21,7 @@ const server = http.createServer(function serverHandler (request, response) {
         
         readFile('./pages/index.html').then(text => {response.write(text); response.end()});
     
-    // import files dynamically
+    // transfer files dynamically
     } else if (adress.includes("img")) { 
         console.log(adress.split("/"));
         const adressArr = adress.split("/");
@@ -41,13 +41,13 @@ const server = http.createServer(function serverHandler (request, response) {
             response.write(text); 
             response.end();
         });
-    // import style
+    // transfer style
     } else if(request.url === "/style"){
         readFile("./assets/scss/style.scss").then(stylesheet => {
             response.write(stylesheet);
             response.end();
         });
-    // import fonts
+    // transfer fonts
     } else if(request.url === "/font/nunito_variable_font_wght.ttf"){
         readFile("./assets/font/nunito_variable_font_wght.ttf").then(font => {
             response.write(font);
