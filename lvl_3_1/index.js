@@ -1,6 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 
+// read file
 function readFile (path) {
     return new Promise((resolve, reject) => {
         fs.readFile(path, (err, data) => {
@@ -17,8 +18,11 @@ const server = http.createServer(function serverHandler (request, response) {
     const adress = request.url 
 
     if(request.url === "/"){
-        readFile('./pages/index.html').then(text => {response.write(text); response.end()})
-    } else if (adress.includes("img")) {
+        
+        readFile('./pages/index.html').then(text => {response.write(text); response.end()});
+    
+    // import files dynamically
+    } else if (adress.includes("img")) { 
         console.log(adress.split("/"));
         const adressArr = adress.split("/");
 
@@ -37,11 +41,13 @@ const server = http.createServer(function serverHandler (request, response) {
             response.write(text); 
             response.end();
         });
+    // import style
     } else if(request.url === "/style"){
         readFile("./assets/scss/style.scss").then(stylesheet => {
             response.write(stylesheet);
             response.end();
         });
+    // import fonts
     } else if(request.url === "/font/nunito_variable_font_wght.ttf"){
         readFile("./assets/font/nunito_variable_font_wght.ttf").then(font => {
             response.write(font);
