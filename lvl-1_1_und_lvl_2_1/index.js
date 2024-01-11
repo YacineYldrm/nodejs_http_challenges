@@ -28,6 +28,8 @@ const server = http.createServer(function serverLogicAkaRequestHandler(
         readFile("./pages/about.html").then(text => {response.write(text); response.end();})
     } else if(request.url === "/style.css") {
         readFile("./assets/css/style.css").then(stylesheet => {response.write(stylesheet); response.end();})
+    } else {
+        readFile("./pages/404.html").then(error => {response.write(error); response.end();})
     }
     // response.end(); // antworte bzw. schick die (in dem Fall leere) response aus
 });
